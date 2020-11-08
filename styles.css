@@ -1,122 +1,139 @@
-@font-face {
-    font-family: "MK3";
-    src: url("./assets/fonts/mortal-kombat-3.ttf") format("Regular"),       
-  }
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    height: 100vh;   
-    background-color: #737b73;   
-    background-image: url(./assets/fundo.jpg);
+  height: 100vh;
+  background-color: #575757;
+
+  /*  background-image: url(./assets/fundo.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
-
+    background-size: cover; */
 }
 
-.main{
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
- 
+@font-face {
+  font-family: "Mk3";
+  src: url("./assets/fonts/mortal-kombat-3.ttf");
 }
 
-.container{
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-
-    
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
 }
 
-.title{
-   margin: 15px;  
+.container {
+  display: flex;
+  background-color: #ffffff;
 }
 
+.title {
+  margin: 15px;
+}
 
+.first-char-name,
+.second-char-name {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+
+  color: #ffffff;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
 
 .memory-game {
-    width: 597px;
-    height: 348px;
-    display: flex; 
-    flex-wrap: wrap;
-    align-content: space-between;
-    background-color: #aaaaaa;
-    padding: 2px;
-    perspective: 1000px;;
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #aaaaaa;
+  padding: 2px;
+  perspective: 1000px;
 }
 
-.card{
-    width: 68px;
-    height: 79px;
-    margin: 3px;
-    position: relative;
-    cursor: pointer;
-    transform:scale(1);
-    transform-style: preserve-3d;
-    transition: transform .9s;
+.card {
+  width: 68px;
+  height: 79px;
+  margin: 3px;
+  position: relative;
+  cursor: pointer;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.9s;
 }
 
-.card:active{
-   transform:scale(0.97);
-   transition:transform .3s;
-    
+.card-mouseover-second-card:hover {
+  box-shadow: 0 0 0 6px #ff0000;
 }
 
-.card-mouseover-second-card:hover{
-    box-shadow:   0 0 0 6px #ff0000;
+.card-mouseover-first-card:hover {
+  box-shadow: 0 0 0 6px #00f800;
 }
 
-.card-mouseover-first-card:hover{
-    box-shadow:  0 0 0 6px #00f800;
+.card-front-finnish {
+  filter: grayscale(70%);
 }
 
-.card-front-finnish{
-    filter: grayscale(70%);
+.card-front,
+.card-back {
+  width: 68px;
+  height: 79px;
+  position: absolute;
+  backface-visibility: hidden;
 }
 
-.card-front,.card-back{
-    width: 68px;
-    height: 79px;    
-    position:absolute;  
-    backface-visibility: hidden;
+.card-front {
+  transform: rotateY(180deg);
 }
 
-.card-front{
-    transform: rotateY(180deg);
-}
-
-.card.flip{
-    transform:rotateY(180deg);
+.card.flip {
+  transform: rotateY(180deg);
 }
 
 .caracter-area {
-    background-color: #aaaaaa;
-    align-self: flex-end;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items:center;
-    width: 200px;
-    height: 100%;
-   
-   
+  background-color: #808080;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 250px;
+  height: 100%;
 }
 
-.char-first-card{  
-  
-    
-    align-self: flex-end;
+.char-first-card {
+  transform: scale(1.3) scaleX(1);
 }
 
-.char-second-card{    
-    
-    align-self: flex-start; 
-    transform: scaleX(-1);
+.char-second-card {
+  transform: scale(1.3) scaleX(-1);
+}
+
+.char-stage {
+}
+
+.life-bar-wrap {
+  border: solid 2px #b8a438;
+  width: 400px;
+  height: 20px;
+  background-color: #4f0908;
+}
+
+.life-bar-content {
+  width: 50%;
+  height: 100%;
+  background-color: #0000e8;
+}
+
+.scores {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

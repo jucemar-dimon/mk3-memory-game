@@ -1,6 +1,7 @@
 let hasFlippedCard = false;
 let firstCard, secondCard;
 let lockBoard = false;
+let hasMatched = false;
 let clickSoundFirstCard = new Audio("./assets/sounds/ui/select_first_card.mp3");
 let clickSoundSecondCard = new Audio(
   "./assets/sounds/ui/select_second_card.mp3"
@@ -9,6 +10,8 @@ let selectingCardSound = new Audio("./assets/sounds/ui/moving_first_card.mp3");
 
 const cards = document.querySelectorAll(".card");
 const imagesBack = document.querySelectorAll(".card-back");
+const firstCharName = document.querySelector(".first-char-name");
+const secondCharName = document.querySelector(".second-char-name");
 const firstChar = document.querySelector(".char-first-card");
 const secondChar = document.querySelector(".char-second-card");
 
@@ -60,12 +63,15 @@ function flipCard() {
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = this;
+    firstCharName.textContent = this.dataset.card.replace("-", " ");
     clickSoundFirstCard.play();
     clickSoundFirstCard.volume = 0.5;
     firstChar.src = `./assets/images/stand/${this.dataset.card}.gif`;
+
     return;
   }
   secondCard = this;
+  secondCharName.textContent = this.dataset.card.replace("-", " ");
   clickSoundSecondCard.play();
   clickSoundSecondCard.volume = 0.5;
   secondChar.src = `./assets/images/stand/${this.dataset.card}.gif`;
@@ -76,6 +82,9 @@ function flipCard() {
 
 function checkForMatch() {
   if (firstCard.dataset.card === secondCard.dataset.card) {
+    lockBoard = true;
+    hasMatched = true;
+    playWinsSound();
     stopAnimationCharacters();
     disableCards();
     return;
@@ -84,8 +93,13 @@ function checkForMatch() {
 }
 
 function stopAnimationCharacters() {
-  firstChar.src = `./assets/images/stand/${firstCard.dataset.card}-selected.gif`;
-  secondChar.src = `./assets/images/stand/${secondCard.dataset.card}-selected.gif`;
+  firstChar.src = `./assets/images/stand/${firstCard.dataset.card}-selected.png`;
+  secondChar.src = `./assets/images/stand/${secondCard.dataset.card}-selected.png`;
+}
+
+function playWinsSound() {
+  const win = new Audio(`./assets/sounds/wins/${secondCard.dataset.card}.mp3`);
+  win.play();
 }
 
 function disableCards() {
@@ -116,10 +130,19 @@ function unflipCards() {
 }
 
 function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
-  /*  firstChar.src = "./assets/images/stand/placeholder-char.gif";
-  secondChar.src = "./assets/images/stand/placeholder-char.gif"; */
+
+  if (!hasMatched) {
+    firstChar.src = "";
+    secondChar.src = "";
+    firstCharName.textContent = "";
+    secondCharName.textContent = "";
+    hasMatched = false;
+  }
+
+  setTimeout(() => {
+    [hasFlippedCard, lockBoard] = [false, false];
+  }, 500);
 }
 
 function shuffle() {

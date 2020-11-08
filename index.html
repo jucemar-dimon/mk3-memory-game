@@ -8,19 +8,38 @@
   </head>
   <body>
     <main class="main">
+      <div class="scores">
+        <div class="life-bar-wrap">
+          <div class="life-bar-content"></div>
+        </div>
+        <div class="life-bar-wrap">
+          <div class="life-bar-content"></div>
+        </div>
+      </div>
       <img src="./assets/images/ui/title.png" alt="Titulo" class="title" />
       <div class="container">
         <div class="caracter-area">
-          <img
-            src="./assets/images/stand/placeholder-char.gif"
-            alt="First character"
-            class="char-first-card"
-          />
+          <span class="first-char-name">Name</span>
+
+          <img src="" alt="" class="char-first-card" />
+          <img src="./assets/images/ui/shadow.png" alt="" class="char-stage" />
         </div>
         <div class="memory-game">
           <div class="card" data-card="shang-tsung">
             <img
               src="./assets/images/profile/shangtsung.gif"
+              alt="face da carta"
+              class="card-front"
+            />
+            <img
+              src="./assets/images/ui/card_back.gif"
+              alt="verso da carta"
+              class="card-back"
+            />
+          </div>
+          <div class="card" data-card="smoke">
+            <img
+              src="./assets/images/profile/smoke.gif"
               alt="face da carta"
               class="card-front"
             />
@@ -379,7 +398,7 @@
               class="card-back"
             />
           </div>
-          <div class="card" data-card="shao-kan">
+          <div class="card" data-card="shao-kahn">
             <img
               src="./assets/images/profile/shaokahn.gif"
               alt="face da carta"
@@ -403,13 +422,27 @@
               class="card-back"
             />
           </div>
+          <div class="card" data-card="smoke">
+            <img
+              src="./assets/images/profile/smoke.gif"
+              alt="face da carta"
+              class="card-front"
+            />
+            <img
+              src="./assets/images/ui/card_back.gif"
+              alt="verso da carta"
+              class="card-back"
+            />
+          </div>
         </div>
         <div class="caracter-area">
+          <span class="second-char-name">Name</span>
           <img
             src="./assets/images/stand/placeholder-char.gif"
             alt=""
             class="char-second-card"
           />
+          <img src="./assets/images/ui/shadow.png" alt="" class="char-stage" />
         </div>
       </div>
       <img src="./assets/images/ui/footer.png" alt="Rodapé" class="title" />
