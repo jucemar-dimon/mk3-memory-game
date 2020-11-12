@@ -2,18 +2,29 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 let lockBoard = false;
 let hasMatched = false;
-let clickSoundFirstCard = new Audio("./assets/sounds/ui/select_first_card.mp3");
-let clickSoundSecondCard = new Audio(
+let points = 0;
+const clickSoundFirstCard = new Audio(
+  "./assets/sounds/ui/select_first_card.mp3"
+);
+const clickSoundSecondCard = new Audio(
   "./assets/sounds/ui/select_second_card.mp3"
 );
-let selectingCardSound = new Audio("./assets/sounds/ui/moving_first_card.mp3");
+const selectingCardSound = new Audio(
+  "./assets/sounds/ui/moving_first_card.mp3"
+);
+const dangerSound = new Audio("./assets/sounds/ui/danger.mp3");
 
 const cards = document.querySelectorAll(".card");
+const lifeBar = document.querySelector(".life-bar-content");
 const imagesBack = document.querySelectorAll(".card-back");
 const firstCharName = document.querySelector(".first-char-name");
 const secondCharName = document.querySelector(".second-char-name");
 const firstChar = document.querySelector(".char-first-card");
 const secondChar = document.querySelector(".char-second-card");
+const iconDanger = document.querySelector(".message-danger");
+const gameStage = document.querySelector(".container");
+const scores = document.querySelector(".scores");
+scores.textContent = points;
 
 imagesBack.forEach((card) => {
   card.addEventListener("mouseover", mouseOverCard);
@@ -61,6 +72,7 @@ function flipCard() {
   this.classList.add("flip");
 
   if (!hasFlippedCard) {
+    hasMatched = false;
     hasFlippedCard = true;
     firstCard = this;
     firstCharName.textContent = this.dataset.card.replace("-", " ");
@@ -80,6 +92,23 @@ function flipCard() {
   checkForMatch();
 }
 
+function updateViewPoints() {
+  scores.textContent = points;
+}
+
+function decreaseLife() {
+  lifeBar.style.width = `${lifeBar.offsetWidth - 20}px`;
+  console.log("LIFE", lifeBar.style.width);
+  if (lifeBar.style.width === "300px") {
+    iconDanger.style.display = "block";
+    dangerSound.play();
+  }
+
+  if (lifeBar.style.width === "300px") {
+    gameStage.classList.add("game-over");
+  }
+}
+
 function checkForMatch() {
   if (firstCard.dataset.card === secondCard.dataset.card) {
     lockBoard = true;
@@ -87,8 +116,12 @@ function checkForMatch() {
     playWinsSound();
     stopAnimationCharacters();
     disableCards();
+    points += 100;
+    updateViewPoints();
     return;
   }
+  decreaseLife();
+
   unflipCards();
 }
 
